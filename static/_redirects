@@ -1,0 +1,2 @@
+# Redirect domain aliases to primary domain
+http://www.travelbee.gr/* http://www.travelbee.eu/:splat 301!
