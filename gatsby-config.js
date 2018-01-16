@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Starter - Dimension by HTML5 UP",
-    author: "Hunter Chang",
-    description: "A Gatsby.js Starter based on Dimension by HTML5 UP"
+    title: "TravelBee",
+    author: "Michael Asimakopoulos",
+    description: "A better travel agency"
   },
   pathPrefix: '/',
   plugins: [
