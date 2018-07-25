@@ -41,7 +41,7 @@ class Main extends React.Component {
           <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="contact" />
             <div style={ display: 'none' }>
-              <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+              <label>Dont fill this out if you are human: <input name="bot-field" /></label>
             </div>
             <div className="field half first">
               <label htmlFor="name">Name</label>
