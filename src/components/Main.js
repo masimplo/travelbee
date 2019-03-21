@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import pic02 from '../images/pic02.jpg'
-import pic03 from '../images/pic03.jpg'
+import NetlifyForm from 'react-netlify-form'
+
+const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
 
 class Main extends React.Component {
   render() {
@@ -29,29 +30,47 @@ class Main extends React.Component {
 
         <article id="contact" className={`${this.props.article === 'contact' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{ display: 'none' }}>
           <h2 className="major">Contact</h2>
-          <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="contact" />
-            <div style={{ display: 'none' }}>
-              <label>Dont fill this out if you are human: <input name="bot-field" /></label>
-            </div>
-            <div className="field half first">
-              <label htmlFor="name">Name</label>
-              <input type="text" name="name" id="name" />
-            </div>
-            <div className="field half">
-              <label htmlFor="email">Email</label>
-              <input type="text" name="email" id="email" />
-            </div>
-            <div className="field">
-              <label htmlFor="message">Message</label>
-              <textarea name="message" id="message" rows="4"></textarea>
-            </div>
-            <div data-netlify-recaptcha="true"></div>
-            <ul className="actions">
-              <li><input type="submit" value="Send Message" className="special" /></li>
-              <li><input type="reset" value="Reset" /></li>
-            </ul>
-          </form>
+          <NetlifyForm
+            name='Contact Form'
+            recaptcha={{
+              sitekey: RECAPTCHA_KEY,
+              size: 'normal'
+            }}>
+            {({ loading, error, recaptchaError, success, recaptcha }) => (
+              <div>
+                {loading &&
+                  <div>Loading...</div>
+                }
+                {error &&
+                  <div style={{color: 'red', paddingBottom: '20px', textAlign: 'center'}}>Your information was not sent. Please try again later.</div>
+                }
+                {recaptchaError &&
+                  <div style={{color: 'red', paddingBottom: '20px', textAlign: 'center'}}>Recaptcha did not match. Please make sure the box is checked.</div>
+                }
+                {success &&
+                  <div>Thank you for contacting us!</div>
+                }
+                {!loading && !success &&
+                  <div>
+                    <div className="field half first">
+                      <label htmlFor="name">Name</label>
+                      <input type="text" name="name" id="name" required />
+                    </div>
+                    <div className="field half">
+                      <label htmlFor="email">Email</label>
+                      <input type="text" name="email" id="email" required />
+                    </div>
+                    <div className="field">
+                      <label htmlFor="message">Message</label>
+                      <textarea name="message" id="message" rows="4" required></textarea>
+                    </div>
+                    {recaptcha}
+                    <button>Send message</button>
+                  </div>
+                }
+              </div>
+            )}
+          </NetlifyForm>
           {close}
         </article>
 
