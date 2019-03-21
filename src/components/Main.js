@@ -46,7 +46,7 @@ class Main extends React.Component {
               <label htmlFor="message">Message</label>
               <textarea name="message" id="message" rows="4"></textarea>
             </div>
-            <div data-netlify-recaptcha></div>
+            <div data-netlify-recaptcha="true"></div>
             <ul className="actions">
               <li><input type="submit" value="Send Message" className="special" /></li>
               <li><input type="reset" value="Reset" /></li>
